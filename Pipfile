@@ -10,6 +10,4 @@ dj-database-url = "*"
 urllib3 = "==1.26.6"
 
 [dev-packages]
-
-[requires]
-python_version = "3.9"
+                                                
