@@ -31,4 +31,3 @@ def get_movie_data(request):
         return JsonResponse({'movies' : movies})
     else:
         return JsonResponse({'error' : 'API Request Failed'}, status = response.status_code)
-    
