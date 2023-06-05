@@ -1,6 +1,8 @@
 import requests
+import json
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.http import HttpResponse
 from .models import Movie
 
 # Create your views here.
@@ -23,11 +25,14 @@ def get_movie_data(request):
         for entry in results:
             movie = Movie(
                 movie_id = entry.get('id'),
-                image_id = entry.get("primaryImage", {}).get('id'),
+                image_id = entry.get("primaryImage", {}).get('id') if entry.get("primaryImage") else None,
                 title_text = entry.get("titleText", {}).get('text'),
             )
             movies.append(movie)
-        
-        return JsonResponse({'movies' : movies})
+
+        movies_data = [movie.to_dict() for movie in movies]
+        movies_json = json.dumps(movies_data, indent=4)
+
+        return HttpResponse({'movies': movies_json})
     else:
-        return JsonResponse({'error' : 'API Request Failed'}, status = response.status_code)
+        return HttpResponse({'error' : 'API Request Failed'}, status = response.status_code)
