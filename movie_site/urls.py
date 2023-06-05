@@ -1,3 +1,6 @@
+from django.urls import path
+from django.views.generic import TemplateView
+
 """
 URL configuration for movie_site project.
 
@@ -21,4 +24,5 @@ from movie_display import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('movies/', views.get_movie_data, name='get_movie_data'),
+    path('', TemplateView.as_view(template_name='index.html')),
 ]
