@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function MovieList() {
   const [movies, setMovies] = useState([]);
@@ -6,14 +6,17 @@ function MovieList() {
   useEffect(() => {
     // Fetch movies from your Django backend
     fetch('movies/') // Replace with your Django API endpoint
-      .then((response) => response.json())
-      .then((data) => setMovies(data.movies))
-      .catch((error) => console.log(error));
+      .then((response) => 
+          response.json())
+      .then((data) => 
+          setMovies(data.movies))
+      .catch((error) => 
+          console.log(error));
   }, []);
 
   return (
     <div>
-      <h1>Movies</h1>
+      <h1>Movies Listed!</h1>
       <ul>
         {movies.map((movie) => (
           <li key={movie.movie_id}>
