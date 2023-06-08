@@ -1,13 +1,11 @@
 import requests
 import json
-from django.shortcuts import render
 from django.http import JsonResponse
-from django.http import HttpResponse
 from .models import Movie
 
 # Create your views here.
 def get_movie_data(request):
-    api_key = 'b612e196camshb5467c8057aa232p1c0346jsnd4a71fa248c3' 
+    # api_key = 'b612e196camshb5467c8057aa232p1c0346jsnd4a71fa248c3' 
     url = 'https://moviesdatabase.p.rapidapi.com/titles'
 
     headers = {
@@ -15,9 +13,10 @@ def get_movie_data(request):
         "X-RapidAPI-Host": "moviesdatabase.p.rapidapi.com"
     }
 
-    response = requests.get(url, headers=headers)
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
 
-    if response.status_code == 200:
         data = response.json()
         results = data.get('results', [])
 
@@ -33,6 +32,6 @@ def get_movie_data(request):
         movies_data = [movie.to_dict() for movie in movies]
         movies_json = json.dumps(movies_data, indent=4)
 
-        return HttpResponse({'movies': movies_json})
-    else:
-        return HttpResponse({'error' : 'API Request Failed'}, status = response.status_code)
+        return JsonResponse({'movies': movies_json})
+    except requests.exceptions.RequestException as e:
+        return JsonResponse({'error': 'API Request Failed: ' + str(e)}, status=500)
