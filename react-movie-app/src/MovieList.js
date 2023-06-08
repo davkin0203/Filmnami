@@ -16,17 +16,14 @@ function MovieList() {
   }, []);
 
   return (
-    <div>
-      <h1>Movies Listed!</h1>
-      <ul>
-        {movies.map((movie) => (
-          <li key={movie.movie_id}>
+      <div className='grid-container'>
+        {movies.map(movie => (
+          <div key={movie.movie_id} className="grid-item">
+            <img src={movie.image_url} alt={movie.title} />
             <h2>{movie.title_text}</h2>
-            <img src={movie.image_url} alt={movie.title_text} />
-          </li>
+          </div>
         ))}
-      </ul>
-    </div>
+      </div>
   );
 }
 
