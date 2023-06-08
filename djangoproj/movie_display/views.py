@@ -25,6 +25,7 @@ def get_movie_data(request):
             movie = Movie(
                 movie_id = entry.get('id'),
                 image_id = entry.get("primaryImage", {}).get('id') if entry.get("primaryImage") else None,
+                image_url = entry.get("primaryImage", {}).get('url') if entry.get("primaryImage") else 'https://preview.redd.it/ivgqylh7zho41.png?width=1080&crop=smart&auto=webp&v=enabled&s=6a3d851aa2ee71e21ce5a888e01efc42a72b33b3',
                 title_text = entry.get("titleText", {}).get('text'),
             )
             movies.append(movie)
