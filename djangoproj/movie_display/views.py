@@ -4,13 +4,14 @@ from django.http import JsonResponse
 from .models import Movie
 
 # Create your views here.
-def get_movie_data(request):
+def trending_movies_week(request):
     # api_key = 'b612e196camshb5467c8057aa232p1c0346jsnd4a71fa248c3' 
-    url = 'https://moviesdatabase.p.rapidapi.com/titles'
+    api_key = '1e01e5c9f102f95e9f3cf4d967cf1934'
+    url = 'https://api.themoviedb.org/3/trending/movie/week?language=en-US'
 
     headers = {
-        "X-RapidAPI-Key": "b612e196camshb5467c8057aa232p1c0346jsnd4a71fa248c3",
-        "X-RapidAPI-Host": "moviesdatabase.p.rapidapi.com"
+        'accept': 'application/json',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZTAxZTVjOWYxMDJmOTVlOWYzY2Y0ZDk2N2NmMTkzNCIsInN1YiI6IjY0ODMzNjA0OTkyNTljMDEzOTJhOTFhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BsHwAFp2ciEklwqRRkShGybDCZgeNKeWU3l64bawy1Q'
     }
 
     try:
@@ -24,9 +25,9 @@ def get_movie_data(request):
         for entry in results:
             movie = Movie(
                 movie_id = entry.get('id'),
-                image_id = entry.get("primaryImage", {}).get('id') if entry.get("primaryImage") else None,
-                image_url = entry.get("primaryImage", {}).get('url') if entry.get("primaryImage") else 'https://preview.redd.it/ivgqylh7zho41.png?width=1080&crop=smart&auto=webp&v=enabled&s=6a3d851aa2ee71e21ce5a888e01efc42a72b33b3',
-                title_text = entry.get("titleText", {}).get('text'),
+                overview = entry.get('overview'),
+                poster_path = entry.get('poster_path'),
+                title = entry.get('title'),
             )
             movies.append(movie)
 

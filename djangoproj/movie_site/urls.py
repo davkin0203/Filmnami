@@ -23,5 +23,5 @@ from movie_display import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('movies/', views.get_movie_data, name='get_movie_data'),
+    path('', views.trending_movies_week, name='trending_movies_week'),
 ]
