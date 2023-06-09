@@ -8,5 +8,6 @@ requests = "*"
 django = "*"
 dj-database-url = "*"
 urllib3 = "==1.26.6"
+django-cors-headers = "*"
 
 [dev-packages]
