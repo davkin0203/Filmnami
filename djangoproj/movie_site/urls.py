@@ -19,9 +19,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from movie_display.views import trending_movies_week
+from movie_display.views import trending_movies_week, search_movies
 from gpt.views import gpt
-from search_movies.views import search_movies
 
 urlpatterns = [
     path('admin/', admin.site.urls),

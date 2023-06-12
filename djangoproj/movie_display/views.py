@@ -11,7 +11,27 @@ def trending_movies_week(request):
         'accept': 'application/json',
         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZTAxZTVjOWYxMDJmOTVlOWYzY2Y0ZDk2N2NmMTkzNCIsInN1YiI6IjY0ODMzNjA0OTkyNTljMDEzOTJhOTFhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BsHwAFp2ciEklwqRRkShGybDCZgeNKeWU3l64bawy1Q'
     }
+    
+    return fetch_movies(url, headers)
 
+def search_movies(request):
+    query = request.GET.get('query','')
+    page = request.GET.get('page', '1')
+
+    if query:
+        url = f"https://api.themoviedb.org/3/search/movie?query={query}&include_adult=false&language=en-US&page={page}"
+
+        headers = {
+            "accept": "application/json",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZTAxZTVjOWYxMDJmOTVlOWYzY2Y0ZDk2N2NmMTkzNCIsInN1YiI6IjY0ODMzNjA0OTkyNTljMDEzOTJhOTFhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BsHwAFp2ciEklwqRRkShGybDCZgeNKeWU3l64bawy1Q"
+        }
+
+        return fetch_movies(url, headers)
+    else:
+        return JsonResponse({'error' : 'an error occured'})
+    
+
+def fetch_movies(url, headers):
     try:
         response = requests.get(url, headers=headers)
         response.raise_for_status()
@@ -22,10 +42,10 @@ def trending_movies_week(request):
         movies = []
         for entry in results:
             movie = Movie(
-                movie_id = entry.get('id'),
-                overview = entry.get('overview'),
-                poster_path = entry.get('poster_path'),
-                title = entry.get('title'),
+                movie_id=entry.get('id'),
+                overview=entry.get('overview'),
+                poster_path=entry.get('poster_path'),
+                title=entry.get('title'),
             )
             movies.append(movie)
 
