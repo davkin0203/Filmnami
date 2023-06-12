@@ -3,9 +3,7 @@ import json
 from django.http import JsonResponse
 from .models import Movie
 
-# Create your views here.
 def trending_movies_week(request):
-    # api_key = 'b612e196camshb5467c8057aa232p1c0346jsnd4a71fa248c3' 
     api_key = '1e01e5c9f102f95e9f3cf4d967cf1934'
     url = 'https://api.themoviedb.org/3/trending/movie/week?language=en-US'
 
