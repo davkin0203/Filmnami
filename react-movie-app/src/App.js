@@ -1,13 +1,13 @@
 import './App.css';
-import MovieList from './MovieList';
+import ListMovies from './ListMovies';
 
 function App() {
   return (
-    <div className="movie-list">
+    <div className="list-movies">
       <div className='site-header'>
-        <h1>Popular Movies This Week!</h1>
+        <h1>Filmnami</h1>
       </div>
-      <MovieList/>
+      <ListMovies/>
     </div>
   );
 }

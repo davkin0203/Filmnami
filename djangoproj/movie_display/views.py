@@ -3,36 +3,32 @@ import json
 from django.http import JsonResponse
 from .models import Movie
 
+api_key = '1e01e5c9f102f95e9f3cf4d967cf1934'
+
 def trending_movies_week(request):
-    api_key = '1e01e5c9f102f95e9f3cf4d967cf1934'
     url = 'https://api.themoviedb.org/3/trending/movie/week?language=en-US'
 
-    headers = {
-        'accept': 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZTAxZTVjOWYxMDJmOTVlOWYzY2Y0ZDk2N2NmMTkzNCIsInN1YiI6IjY0ODMzNjA0OTkyNTljMDEzOTJhOTFhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BsHwAFp2ciEklwqRRkShGybDCZgeNKeWU3l64bawy1Q'
-    }
-    
-    return fetch_movies(url, headers)
+    return fetch_movies(url)
 
 def search_movies(request):
     query = request.GET.get('query','')
     page = request.GET.get('page', '1')
 
     if query:
-        url = f"https://api.themoviedb.org/3/search/movie?query={query}&include_adult=false&language=en-US&page={page}"
+        url = f'https://api.themoviedb.org/3/search/movie?query={query}&include_adult=false&language=en-US&page={page}'
 
-        headers = {
-            "accept": "application/json",
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZTAxZTVjOWYxMDJmOTVlOWYzY2Y0ZDk2N2NmMTkzNCIsInN1YiI6IjY0ODMzNjA0OTkyNTljMDEzOTJhOTFhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BsHwAFp2ciEklwqRRkShGybDCZgeNKeWU3l64bawy1Q"
-        }
-
-        return fetch_movies(url, headers)
+        return fetch_movies(url)
     else:
         return JsonResponse({'error' : 'an error occured'})
     
 
-def fetch_movies(url, headers):
+def fetch_movies(url):
     try:
+        headers = {
+            'accept': 'application/json',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZTAxZTVjOWYxMDJmOTVlOWYzY2Y0ZDk2N2NmMTkzNCIsInN1YiI6IjY0ODMzNjA0OTkyNTljMDEzOTJhOTFhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BsHwAFp2ciEklwqRRkShGybDCZgeNKeWU3l64bawy1Q'
+        }
+
         response = requests.get(url, headers=headers)
         response.raise_for_status()
 
