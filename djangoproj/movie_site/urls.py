@@ -19,12 +19,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from movie_display.views import trending_movies_week, search_movies
+from movie_display.views import specified_movies, search_movies, specific_movie
 from gpt.views import gpt
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', trending_movies_week, name='trending_movies_week'),
+    path('home/movies/specified-movies/', specified_movies, name='specified_movies'),
     path('gpt/', gpt, name='gpt'),
-    path('search/', search_movies, name='search_movies')
+    path('home/movies/search/', search_movies, name='search_movies'),
+    path('home/movies/movie-details/', specific_movie, name='specific_movie'),
 ]
