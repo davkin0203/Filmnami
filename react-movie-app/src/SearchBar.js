@@ -13,7 +13,7 @@ function SearchBar() {
 
     const fetchSearchResults = async (query) => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/search', {
+            const response = await axios.get('http://127.0.0.1:8000/home/movies/search', {
                 params: {
                     query: query,
                     page: 1,
@@ -26,7 +26,7 @@ function SearchBar() {
 
 
             const moviesData = movieData.map((movie) => ({
-                id: movie.id,
+                movie_id: movie.id,
                 title: movie.title,
                 poster_path: movie.poster_path
                 // Include any other properties you need
@@ -63,7 +63,8 @@ function SearchBar() {
             <ul className="dropdown-menu">
                 {searchResults.map((movie) => (
                 <li key={movie.movie_id} className='dropdown-item'>
-                    <img src={`${BASE_URL}${movie.poster_path}`} alt={movie.title} />
+                    {movie.poster_path !== null && <img src={`${BASE_URL}${movie.poster_path}`} alt={movie.title} />}
+                    {movie.poster_path === null && <img src={'https://content.schoolinsites.com/api/documents/ebbca81b01694c91aa908f5374842a9f.gif'} alt={movie.title} />}
                     <h2>{movie.title}</h2>
                 </li>
             ))}
