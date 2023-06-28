@@ -21,9 +21,7 @@ function SearchBar() {
             });
 
             const searchData = response.data;
-            console.log(searchData);
             const movieData = JSON.parse(searchData.movies);
-
 
             const moviesData = movieData.map((movie) => ({
                 movie_id: movie.id,

@@ -40,11 +40,20 @@ function DisplayDetails() {
 
     return (
         <div className="movie-details-page">
-            <div className="grid-item">
-              {movieDetails.poster_path !== 'null' && <img src={`${BASE_URL}${movieDetails.poster_path}`} alt={movieDetails.title} />}
-              {movieDetails.poster_path === 'null' && <img src={'https://content.schoolinsites.com/api/documents/ebbca81b01694c91aa908f5374842a9f.gif'} alt={movieDetails.title} />}
-              <h2>{movieDetails.title}</h2>
-              <h3>{movieDetails.runtime}</h3>
+            <div className="poster-container">
+                {movieDetails.poster_path ? (
+                    <img src={`${BASE_URL}${movieDetails.poster_path}`} alt={movieDetails.title} />
+                ) : (
+                <img
+                    src="https://content.schoolinsites.com/api/documents/ebbca81b01694c91aa908f5374842a9f.gif"
+                    alt={movieDetails.title}
+                />
+                )}
+                <h2>{movieDetails.title}</h2>
+            </div>
+            <div className="synopsis-container">
+                <h2>Synopsis: {movieDetails.overview}</h2>
+                <h3>Length: {movieDetails.runtime} minutes </h3>
             </div>
         </div>
     )

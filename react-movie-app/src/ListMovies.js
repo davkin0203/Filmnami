@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Filter from './Filter';
 import SearchBar from './SearchBar';
+import GptSearchBar from './GptSearchBar';
 import PageNav from './PageNav';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -33,6 +34,7 @@ function ListMovies() {
         title: movie.title,
         poster_path: movie.poster_path,
       }));
+
       setMovies(moviesData);
       } catch(error) {
         console.error('Error fetching search results: ', error);
@@ -57,6 +59,9 @@ function ListMovies() {
         <div className='grid-container-filter-search'>
           <div className='grid-child filter'>
             <Filter selectedFilter={selectedFilter} onFilterChange={handleFilterChange}/>
+          </div>
+          <div className='grid-child gpt-search'>
+            <GptSearchBar/>
           </div>
           <div className='grid-child search'>
             <SearchBar/>

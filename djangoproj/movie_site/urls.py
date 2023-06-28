@@ -25,7 +25,7 @@ from gpt.views import gpt
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/movies/specified-movies/', specified_movies, name='specified_movies'),
-    path('gpt/', gpt, name='gpt'),
+    path('home/movies/search-gpt/', gpt, name='gpt'),
     path('home/movies/search/', search_movies, name='search_movies'),
     path('home/movies/movie-details/', specific_movie, name='specific_movie'),
 ]
