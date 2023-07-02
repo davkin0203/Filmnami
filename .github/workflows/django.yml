@@ -29,3 +29,20 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test
+        
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: login
+      uses: actions/heroku@master
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      with:
+        args: container:login
+    - name: set remote
+      run: git remote set-url origin https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/Filmnami.git
+    - name: push and deploy
+      run: git push origin HEAD:main -f
