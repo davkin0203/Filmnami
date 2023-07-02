@@ -37,7 +37,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: login
-      uses: actions/heroku@master
+      uses: akhileshns/heroku-deploy@v3.12.12
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       with:
