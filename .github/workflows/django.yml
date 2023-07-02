@@ -40,8 +40,9 @@ jobs:
       uses: akhileshns/heroku-deploy@v3.12.12
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      with:
-        args: container:login
+        HEROKU_APP_NAME: "filmnami" #Must be unique in Heroku
+        HEROKU_EMAIL: "davkin0203@gmail.com"
+        appdir: "djangoproj"
     - name: set remote
       run: git remote set-url origin https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/Filmnami.git
     - name: push and deploy
