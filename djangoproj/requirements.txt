@@ -12,6 +12,7 @@ Django==4.2.1
 django-cors-headers==4.0.0
 filelock==3.12.0
 frozenlist==1.3.3
+gunicorn==20.1.0
 idna==3.4
 multidict==6.0.4
 openai==0.27.8
@@ -25,4 +26,5 @@ tzdata==2023.3
 urllib3==1.26.6
 virtualenv==20.23.0
 virtualenv-clone==0.5.7
+whitenoise==6.5.0
 yarl==1.9.2
